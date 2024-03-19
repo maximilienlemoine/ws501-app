@@ -11,21 +11,35 @@ function App() {
         setFile(event.target.files[0])
     }
 
-    function onSubmit() {
-        const url = URL.createObjectURL(file);
-        loader.load(
-            url,
-            (gltf) => {
-                setGltf(gltf)
-                console.log('success', gltf)
-            },
-            (progress) => {
-                console.log('progress', progress)
-            },
-            (error) => {
-                console.log('error', error)
+    async function onSubmit() {
+        const form = new FormData();
+        form.append('file', file);
+        const options = {
+            method: 'POST',
+            headers: {
             }
-        )
+        };
+        options.body = form;
+
+        try {
+            const response = await fetch('http://localhost:8081/upload', options)
+            const data = await response.json();
+            loader.load(
+                await data.url,
+                (gltf) => {
+                    setGltf(gltf)
+                    console.log('success', gltf)
+                },
+                (progress) => {
+                    console.log('progress', progress)
+                },
+                (error) => {
+                    console.log('error', error)
+                }
+            )
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     return (
