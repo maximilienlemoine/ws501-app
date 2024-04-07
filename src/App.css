@@ -6,17 +6,47 @@
   color: #61dafb;
 }
 
-
-.flex-container {
+.flex {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.gap-5 {
+  gap: 10px;
 }
 
 .card {
   background-color: white;
   margin-bottom: 20px;
+  width: 10vw;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-child {
+  margin-bottom: 10px;
+  background-color: white;
+  width: 3vw;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.display-color {
+  position: absolute;
+  top: 250px;
+  left: 20px;
+  z-index: 10;
+}
+
+.pastille {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid black;
 }
