@@ -1,7 +1,19 @@
-import React, {startTransition} from 'react';
+import React, {startTransition, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-function ModelSelection({models}) {
+function ModelSelection() {
+    const [models, setModels] = useState([]);
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = async () => {
+        const response = await fetch('http://localhost:8000/model')
+        const data = await response.json()
+        setModels(data)
+    }
+
     const navigate = useNavigate();
 
     const handleModelClick = (modelName) => {
