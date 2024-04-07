@@ -44,7 +44,6 @@ function Models() {
         }
     }
 
-
     return (
         <div style={{ width: "100%", height: "90vh" }}>
             <div className={'display-color'}>
@@ -59,7 +58,8 @@ function Models() {
                 <ambientLight intensity={0.5}/>
                 <directionalLight position={[-1, 1, 0]} intensity={0.8}/>
                 <directionalLight position={[1, 1, 0]} intensity={0.8}/>
-                <OrbitControls/>
+                <pointLight position={[0, 3, 0]} />
+                <OrbitControls autoRotate autoRotateSpeed={1.0} minDistance={1.5} maxDistance={3}/>
                 <mesh scale={[0.1, 0.1, 0.1]} position={[0, 0.85, -0.7]} onClick={handleMeshClick}>
                     <sphereGeometry/>
                     <meshBasicMaterial color={'red'}/>
