@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {Html, OrbitControls, useGLTF} from '@react-three/drei';
 import {useParams} from "react-router-dom";
-import {Canvas, useFrame} from "@react-three/fiber";
-import {CanvasTexture, Color} from "three";
+import {Canvas} from "@react-three/fiber";
+import {Color} from "three";
 
 function Models() {
     const { name } = useParams();
@@ -10,11 +10,6 @@ function Models() {
     const gltf = useGLTF(url)
     const [menuOpen, setMenuOpen] = useState(false);
     const meshRef = useRef();
-
-    const canvas = document.createElement('canvas');
-    canvas.width = 1;
-    canvas.height = 1;
-    const context = canvas.getContext('2d');
 
     const BLEU_PETROLE = new Color('#19476b');
     const NOIR_MINUIT = new Color('#000000');
@@ -31,23 +26,6 @@ function Models() {
     const KAKI_CLAIR = new Color('#8ca581');
     const VERT_EAU = new Color('#bde2bb');
     const BLEU_CLAIR = new Color('#abcbd0');
-    context.fillStyle = JAUNE.getStyle();
-    context.fillStyle = GRIS_LUNE.getStyle();
-    context.fillStyle = NOIR_MINUIT.getStyle();
-    context.fillStyle = BLEU_PETROLE.getStyle();
-    context.fillStyle = SABLE.getStyle();
-    context.fillStyle = ORANGE.getStyle();
-    context.fillStyle = ROUGE.getStyle();
-    context.fillStyle = BORDEAUX.getStyle();
-    context.fillStyle = ROSE.getStyle();
-    context.fillStyle = VIOLET.getStyle();
-    context.fillStyle = BLEU_VIOLET.getStyle();
-    context.fillStyle = VERT_ANGLAIS.getStyle();
-    context.fillStyle = KAKI_CLAIR.getStyle();
-    context.fillStyle = VERT_EAU.getStyle();
-    context.fillStyle = BLEU_CLAIR.getStyle();
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    const texture = new CanvasTexture(canvas);
 
     const handleMeshClick = (event) => {
         setMenuOpen(!menuOpen);
