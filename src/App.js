@@ -18,7 +18,7 @@ function App() {
                 <Routes>
                     <Route path="/select-model" element={<ModelSelection/>} />
                     <Route path="/secure-import" element={<Import />} />
-                    <Route path="/model/:name" element={<Models />} />
+                    <Route path="/model/" element={<Models />} />
                 </Routes>
             </header>
         </div>

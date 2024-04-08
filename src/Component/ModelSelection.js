@@ -16,9 +16,9 @@ function ModelSelection() {
 
     const navigate = useNavigate();
 
-    const handleModelClick = (modelName) => {
+    const handleModelClick = (model) => {
         startTransition(() => {
-            navigate(`/model/${modelName}`);
+            navigate(`/model/`, { state: { model } });
         });
     }
 
@@ -26,7 +26,7 @@ function ModelSelection() {
         <div>
             <h1>Selectionnez un modèle</h1>
             {models.map((model, index) => (
-                <button key={index} onClick={() => handleModelClick(model.file_name)}>
+                <button key={index} onClick={() => handleModelClick(model)}>
                     {model.name}
                 </button>
             ))}
