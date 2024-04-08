@@ -1,8 +1,8 @@
 import React, {useRef, useState} from "react";
 import {Html, OrbitControls, useGLTF} from '@react-three/drei';
-import {useLocation, useParams} from "react-router-dom";
-import {Canvas, useFrame} from "@react-three/fiber";
-import {Color, MeshBasicMaterial, MeshStandardMaterial, TextureLoader, Vector3} from "three";
+import {useLocation} from "react-router-dom";
+import {Canvas} from "@react-three/fiber";
+import {Color, MeshStandardMaterial, TextureLoader} from "three";
 import { Tooltip } from 'react-tooltip'
 import textureHint from '../asset/loupe.svg';
 import TriggerMenue from "./TriggerComponent";
