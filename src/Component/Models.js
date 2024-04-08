@@ -97,6 +97,7 @@ function Models() {
                             <TriggerMenue position={[0, 0.8, 0.38]} handleMeshClick={handleMeshClick}/> {/* Seat */}
                         </group>
                     )}
+                <primitive ref={primitiveRef} object={gltf.scene} dispose={null}/>
                 {menuOpen && (
                     <Html position={[0, 1.2, -0.7]}>
                         <div className={'card'}>
