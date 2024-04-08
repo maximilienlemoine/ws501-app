@@ -2,8 +2,10 @@ import React, {useRef, useState} from "react";
 import {Html, OrbitControls, useGLTF} from '@react-three/drei';
 import {useLocation, useParams} from "react-router-dom";
 import {Canvas, useFrame} from "@react-three/fiber";
-import {Color, Vector3} from "three";
+import {Color, MeshBasicMaterial, MeshStandardMaterial, TextureLoader, Vector3} from "three";
 import { Tooltip } from 'react-tooltip'
+import textureHint from '../asset/loupe.svg';
+import TriggerMenue from "./TriggerComponent";
 
 function Models() {
     const location = useLocation();
@@ -13,6 +15,7 @@ function Models() {
     const [menuOpen, setMenuOpen] = useState(false);
     const primitiveRef = useRef();
     const cameraRef = useRef();
+    const groupTrigger = useRef();
 
     const BLEU_PETROLE = {color: new Color('#19476b'), name: 'Bleu Pétrole'};
     const NOIR_MINUIT = {color: new Color('#000000'), name: 'Noir Minuit'};
@@ -34,6 +37,20 @@ function Models() {
         setMenuOpen(!menuOpen);
     }
 
+    const textureLoader = new TextureLoader();
+    textureLoader.load(textureHint, (texture) => {
+        console.log('Texture loaded');
+        if (groupTrigger.current) {
+            groupTrigger.current.children.forEach((mesh) => {
+                if (mesh) {
+                    mesh.material = new MeshStandardMaterial({map: texture});
+                    mesh.material.needsUpdate = true;
+                } else {
+                }
+            });
+        }
+    });
+
     const handleColorChange = (color) => () => {
         if (primitiveRef.current) {
             const mesh = primitiveRef.current.getObjectByName(model.frame);
@@ -45,6 +62,7 @@ function Models() {
             }
         }
     }
+
 
     return (
         <div style={{ width: "100%", height: "90vh" }}>
@@ -70,11 +88,15 @@ function Models() {
                 <directionalLight position={[1, 1, 0]} intensity={0.8}/>
                 <pointLight position={[0, 3, 0]} />
                 <OrbitControls ref={cameraRef} autoRotate autoRotateSpeed={1.0} minDistance={1.5} maxDistance={3} enablePan={false}/>
-                <mesh scale={[0.1, 0.1, 0.1]} position={[0, 0.85, -0.7]} onClick={handleMeshClick}>
-                    <circleGeometry/>
-                    <meshBasicMaterial color={'red'}/>
-                </mesh>
-                <primitive ref={primitiveRef} object={gltf.scene} dispose={null}/>
+                    {model && (
+                        <group ref={groupTrigger}>
+                            <TriggerMenue position={[0, 0.4, -1]} handleMeshClick={handleMeshClick}/> {/* Front Luggage Rack */}
+                            <TriggerMenue position={[0, 0.4, 0.9]} handleMeshClick={handleMeshClick}/> {/* Back Luggage Rack */}
+                            <TriggerMenue position={[0, -0.6, -0.1]} handleMeshClick={handleMeshClick}/> {/* Chain / Belt */}
+                            <TriggerMenue position={[0, -0.2, -0.7]} handleMeshClick={handleMeshClick}/> {/* Fork */}
+                            <TriggerMenue position={[0, 0.8, 0.38]} handleMeshClick={handleMeshClick}/> {/* Seat */}
+                        </group>
+                    )}
                 {menuOpen && (
                     <Html position={[0, 1.2, -0.7]}>
                         <div className={'card'}>
