@@ -3,6 +3,7 @@ import {Html, OrbitControls, useGLTF} from '@react-three/drei';
 import {useParams} from "react-router-dom";
 import {Canvas} from "@react-three/fiber";
 import {Color} from "three";
+import { Tooltip } from 'react-tooltip'
 
 function Models() {
     const { name } = useParams();
@@ -11,21 +12,21 @@ function Models() {
     const [menuOpen, setMenuOpen] = useState(false);
     const meshRef = useRef();
 
-    const BLEU_PETROLE = new Color('#19476b');
-    const NOIR_MINUIT = new Color('#000000');
-    const GRIS_LUNE = new Color('#ffffff');
-    const SABLE = new Color('#ddc692');
-    const JAUNE = new Color('#f5c245');
-    const ORANGE = new Color('#fa7712');
-    const ROUGE = new Color('#ba2526');
-    const BORDEAUX = new Color('#7c262d');
-    const ROSE = new Color('#faadb2');
-    const VIOLET = new Color('#896eac');
-    const BLEU_VIOLET = new Color('#5273a5');
-    const VERT_ANGLAIS = new Color('#17342e');
-    const KAKI_CLAIR = new Color('#8ca581');
-    const VERT_EAU = new Color('#bde2bb');
-    const BLEU_CLAIR = new Color('#abcbd0');
+    const BLEU_PETROLE = {color: new Color('#19476b'), name: 'Bleu Pétrole'};
+    const NOIR_MINUIT = {color: new Color('#000000'), name: 'Noir Minuit'};
+    const GRIS_LUNE = {color: new Color('#ffffff'), name: 'Gris Lune'};
+    const SABLE = {color: new Color('#ddc692'), name: 'Sable'};
+    const JAUNE = {color: new Color('#f5c245'), name: 'Jaune'};
+    const ORANGE = {color: new Color('#fa7712'), name: 'Orange'};
+    const ROUGE = {color: new Color('#ba2526'), name: 'Rouge'};
+    const BORDEAUX = {color: new Color('#7c262d'), name: 'Bordeaux'};
+    const ROSE = {color: new Color('#faadb2'), name: 'Rose'};
+    const VIOLET = {color: new Color('#896eac'), name: 'Violet'};
+    const BLEU_VIOLET = {color: new Color('#5273a5'), name: 'Bleu Violet'};
+    const VERT_ANGLAIS = {color: new Color('#17342e'), name: 'Vert Anglais'};
+    const KAKI_CLAIR = {color: new Color('#8ca581'), name: 'Kaki Clair'};
+    const VERT_EAU = {color: new Color('#bde2bb'), name: 'Vert Eau'};
+    const BLEU_CLAIR = {color: new Color('#abcbd0'), name: 'Bleu Clair'};
 
     const handleMeshClick = (event) => {
         setMenuOpen(!menuOpen);
@@ -49,8 +50,16 @@ function Models() {
             <div className={'display-color'}>
                 <div className="flex column gap-5">
                     {[BLEU_PETROLE, NOIR_MINUIT, GRIS_LUNE, SABLE, JAUNE, ORANGE, ROUGE, BORDEAUX, ROSE, VIOLET, BLEU_VIOLET, VERT_ANGLAIS, KAKI_CLAIR, VERT_EAU, BLEU_CLAIR].map((color, index) => (
-                        <div key={index} className="pastille" style={{backgroundColor: color.getStyle()}} onClick={handleColorChange(color)}>
-                        </div>
+                            <div key={index}
+                                 className="pastille"
+                                 style={{backgroundColor: color.color.getStyle()}}
+                                 onClick={handleColorChange(color.color)}
+                                 data-tooltip-id={index}
+                                 data-tooltip-content={color.name}
+                                 data-tooltip-place={'right'}
+                            >
+                                <Tooltip id={index} ></Tooltip>
+                            </div>
                     ))}
                 </div>
             </div>

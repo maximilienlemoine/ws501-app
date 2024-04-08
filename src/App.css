@@ -38,14 +38,14 @@
 
 .display-color {
   position: absolute;
-  top: 250px;
+  top: 10%;
   left: 20px;
   z-index: 10;
 }
 
 .pastille {
-  width: 40px;
-  height: 40px;
+  width: 4vh;
+  height: 4vh;
   border-radius: 50%;
   display: inline-block;
   border: 1px solid black;
