@@ -21,19 +21,29 @@
 .card {
   background-color: white;
   margin-bottom: 20px;
-  width: 10vw;
+  width: 20vw;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-child {
-  margin-bottom: 10px;
+  margin: 10px;
   background-color: white;
-  width: 3vw;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card-child:hover {
+  background-color: #f0f0f0;
+}
+
+.select {
+  background-color: #f0f0f0;
+  border: black 1px solid;
 }
 
 .display-color {
@@ -43,10 +53,22 @@
   z-index: 10;
 }
 
+.display-menu {
+  position: absolute;
+  top: 20%;
+  left: 80px;
+  z-index: 10;
+}
+
 .pastille {
   width: 4vh;
   height: 4vh;
   border-radius: 50%;
   display: inline-block;
   border: 1px solid black;
+}
+
+.closeStyle {
+ float: right;
+  margin: 25px 0;
 }
