@@ -1,8 +1,8 @@
 import React, {useRef, useState} from "react";
 import {Html, OrbitControls, useGLTF} from '@react-three/drei';
 import {useLocation, useParams} from "react-router-dom";
-import {Canvas} from "@react-three/fiber";
-import {Color} from "three";
+import {Canvas, useFrame} from "@react-three/fiber";
+import {Color, Vector3} from "three";
 import { Tooltip } from 'react-tooltip'
 
 function Models() {
@@ -11,7 +11,8 @@ function Models() {
     const url = `http://localhost:8000/files/${model.file_name}`;
     const gltf = useGLTF(url)
     const [menuOpen, setMenuOpen] = useState(false);
-    const meshRef = useRef();
+    const primitiveRef = useRef();
+    const cameraRef = useRef();
 
     const BLEU_PETROLE = {color: new Color('#19476b'), name: 'Bleu Pétrole'};
     const NOIR_MINUIT = {color: new Color('#000000'), name: 'Noir Minuit'};
@@ -34,8 +35,8 @@ function Models() {
     }
 
     const handleColorChange = (color) => () => {
-        if (meshRef.current) {
-            const mesh = meshRef.current.getObjectByName(model.frame);
+        if (primitiveRef.current) {
+            const mesh = primitiveRef.current.getObjectByName(model.frame);
             if (mesh) {
                 mesh.material.color.set(color);
                 mesh.material.needsUpdate = true;
@@ -68,12 +69,12 @@ function Models() {
                 <directionalLight position={[-1, 1, 0]} intensity={0.8}/>
                 <directionalLight position={[1, 1, 0]} intensity={0.8}/>
                 <pointLight position={[0, 3, 0]} />
-                <OrbitControls autoRotate autoRotateSpeed={1.0} minDistance={1.5} maxDistance={3} enablePan={false}/>
+                <OrbitControls ref={cameraRef} autoRotate autoRotateSpeed={1.0} minDistance={1.5} maxDistance={3} enablePan={false}/>
                 <mesh scale={[0.1, 0.1, 0.1]} position={[0, 0.85, -0.7]} onClick={handleMeshClick}>
-                    <sphereGeometry/>
+                    <circleGeometry/>
                     <meshBasicMaterial color={'red'}/>
                 </mesh>
-                <primitive ref={meshRef} object={gltf.scene} dispose={null}/>
+                <primitive ref={primitiveRef} object={gltf.scene} dispose={null}/>
                 {menuOpen && (
                     <Html position={[0, 1.2, -0.7]}>
                         <div className={'card'}>
