@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .column {
   flex-direction: column;
 }
@@ -16,6 +20,10 @@
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 nav a {
@@ -43,15 +51,24 @@ nav a:hover {
 .card-child {
   margin: 10px;
   background-color: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   cursor: pointer;
+  border: transparent 1px solid;
 }
 
 .card-child:hover {
   background-color: #f0f0f0;
+}
+
+.child {
+  width: 34%;
+}
+
+.child:last-child {
+  width: 100%;
 }
 
 .select {
@@ -82,6 +99,11 @@ nav a:hover {
 }
 
 .closeStyle {
- float: right;
+  float: right;
   margin: 25px 0;
+  cursor: pointer;
+}
+
+.closeStyle:hover {
+  color: #0071E3;
 }

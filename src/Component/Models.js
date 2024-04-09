@@ -6,7 +6,6 @@ import {Color} from "three";
 import {Tooltip} from 'react-tooltip'
 import TriggerComponent from "./TriggerComponent";
 import {XCircle} from "react-bootstrap-icons";
-import {FormControlLabel, Switch} from "@mui/material";
 
 function Models() {
     const location = useLocation();
@@ -47,18 +46,64 @@ function Models() {
                 content =
                     <div>
                         <h3>Porte Baggage avant</h3>
-                        <h4>
-                            <FormControlLabel
-                                control={<Switch/>}
-                                label={'ELLIPSE FR1 - phare intégré'}
-                                onChange={handleSwitchProp(context)}
-                            />
-                        </h4>
-                        <small>
-                            Un porte-bagage avant modernisé, muni d’une plateforme AVS « Quick fix », permettant le
-                            montage rapide de paniers et caisses identiques à l'avant et à l'arrière. Le phare intégré
-                            permet de garder une visibilité totale même chargé.​ Charge max : 10kg | Poids : 0,35kg
-                        </small>
+                        <div className="card-child" onClick={handleChangeProp('ELLIPSE FR1 - phare intégré')}>
+                            <h4>ELLIPSE FR1 - phare intégré</h4>
+                            <small>
+                                Un porte-bagage avant modernisé, muni d’une plateforme AVS « Quick fix », permettant le
+                                montage rapide de paniers et caisses identiques à l'avant et à l'arrière. Le phare
+                                intégré
+                                permet de garder une visibilité totale même chargé.​ Charge max : 10kg | Poids : 0,35kg
+                            </small>
+                        </div>
+
+                        <div>
+                            <h4>Pannier</h4>
+                            <div className={'flex flex-wrap justify-between'}>
+                                <div className="card-child child" onClick={handleChangeProp('Daily')}>
+                                    <h4>Daily</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Daily mixte')}>
+                                    <h4>Daily mixte</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Epic standard')}>
+                                    <h4>Epic standard</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Epic bois')}>
+                                    <h4>Epic bois</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Woody')}>
+                                    <h4>Woody</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Bakery standard')}>
+                                    <h4>Bakery standard</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Bakery bois')}>
+                                    <h4>Bakery bois</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>;
                 break;
             case 'Back Luggage Rack':
@@ -79,7 +124,54 @@ function Models() {
                         </small>
                     </div>
 
-                    {/* Si select activer la div des accessoires sinon hide */}
+                    <div>
+                        <h4>Pannier</h4>
+                        <div className={'flex flex-wrap justify-between'}>
+                            <div className="card-child child" onClick={handleChangeProp('Daily')}>
+                                <h4>Daily</h4>
+                                <small>
+                                    Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Daily mixte')}>
+                                <h4>Daily mixte</h4>
+                                <small>
+                                    Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Epic standard')}>
+                                <h4>Epic standard</h4>
+                                <small>
+                                    Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Epic bois')}>
+                                <h4>Epic bois</h4>
+                                <small>
+                                    Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Woody')}>
+                                <h4>Woody</h4>
+                                <small>
+                                    Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Bakery standard')}>
+                                <h4>Bakery standard</h4>
+                                <small>
+                                    Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
+                                </small>
+                            </div>
+                            <div className="card-child child" onClick={handleChangeProp('Bakery bois')}>
+                                <h4>Bakery bois</h4>
+                                <small>
+                                    Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="card-child select" onClick={handleChangeProp('Porte sacoche minimaliste')}>
                         <h4>
                             Porte sacoche minimaliste
@@ -119,17 +211,13 @@ function Models() {
                         <h3>
                             Fourche
                         </h3>
-                        <h4>
-                            <FormControlLabel
-                                control={<Switch/>}
-                                label={'Fourche suspendue'}
-                                onChange={handleSwitchProp(context)}
-                            />
-                        </h4>
-                        <small>
-                            Les pavées et les routes cabossées sont votre quotidien ? Ajoutez du confort à votre
-                            direction, pour des déplacements sécurisants en ville et sur les chemins. | + 1,85kg
-                        </small>
+                        <div className="card-child" onClick={handleChangeProp('Fourche suspendue')}>
+                            <h4>Fourche suspendue</h4>
+                            <small>
+                                Les pavées et les routes cabossées sont votre quotidien ? Ajoutez du confort à votre
+                                direction, pour des déplacements sécurisants en ville et sur les chemins. | + 1,85kg
+                            </small>
+                        </div>
                     </div>;
                 break;
             case 'Seat':
@@ -138,17 +226,14 @@ function Models() {
                         <h3>
                             Selle
                         </h3>
-                        <h4>
-                            <FormControlLabel
-                                control={<Switch/>}
-                                label={'Assise suspendue'}
-                                onChange={handleSwitchProp(context)}
-                            />
-                        </h4>
-                        <small>
-                            Une touche de confort supplémentaire au niveau de l'assise, parfait pour niveler les défauts
-                            de la route et éviter les plus gros chocs.​ | +0,2kg
-                        </small>
+                        <div className="card-child" onClick={handleChangeProp('Assise suspendue')}>
+                            <h4>Assise suspendue</h4>
+                            <small>
+                                Une touche de confort supplémentaire au niveau de l'assise, parfait pour niveler les
+                                défauts de la route et éviter les plus gros chocs.​ | +0,2kg
+                            </small>
+                        </div>
+
                     </div>;
                 break;
             case 'Stand':
@@ -176,11 +261,12 @@ function Models() {
         setLastMenuOpen(context);
     }
 
-    const handleSwitchProp = (context) => (event) => {
-        console.log(context, event.target.checked);
-    }
-
-    const handleChangeProp = (context) => {
+    const handleChangeProp = (context) => (event) => {
+        if (event.target.classList.contains('card-child')) {
+            event.target.classList.toggle('select');
+        } else {
+            event.target.parentElement.classList.toggle('select');
+        }
         console.log(context);
     }
 
