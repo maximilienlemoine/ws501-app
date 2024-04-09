@@ -172,7 +172,7 @@ function Models() {
                         </div>
                     </div>
 
-                    <div className="card-child select" onClick={handleChangeProp('Porte sacoche minimaliste')}>
+                    <div className="card-child" onClick={handleChangeProp('Porte sacoche minimaliste')}>
                         <h4>
                             Porte sacoche minimaliste
                         </h4>

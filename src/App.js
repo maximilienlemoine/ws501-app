@@ -12,7 +12,7 @@ function App() {
             <header className="App-header">
                 <h1>Configurateur Ellipse Bikes</h1>
                 <nav className={'flex gap-10 justify-center'}>
-                    <Link to="/select-model">Selectionner un modèle PRO</Link>
+                    <Link to="/select-model">Selectionner un modèle</Link>
                     <Link to="/secure-import">Importer un modèle</Link>
                 </nav>
                 <Routes>
