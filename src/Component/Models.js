@@ -16,6 +16,29 @@ function Models() {
     const primitiveRef = useRef();
     const [cardContent, setCardContent] = useState(null);
     const [lastMenuOpen, setLastMenuOpen] = useState(null);
+    const initDisableMesh = [
+        model.chain,
+        model.suspension_fork,
+        model.suspension_seat,
+        model.central_stand,
+        model.front_luggage_rack,
+        model.back_luggage_rack,
+        model.front_daily,
+        model.back_daily,
+        model.front_daily_mixte,
+        model.back_daily_mixte,
+        model.front_epic_standard,
+        model.back_epic_standard,
+        model.front_epic_bois,
+        model.back_epic_bois,
+        model.front_woody,
+        model.back_woody,
+        model.front_backery_standard,
+        model.back_backery_standard,
+        model.front_backery_bois,
+        model.back_backery_bois,
+        model.back_thule_bag
+    ]
 
     const BLEU_PETROLE = {color: new Color('#19476b'), name: 'Bleu Pétrole'};
     const NOIR_MINUIT = {color: new Color('#000000'), name: 'Noir Minuit'};
@@ -33,6 +56,19 @@ function Models() {
     const VERT_EAU = {color: new Color('#bde2bb'), name: 'Vert Eau'};
     const BLEU_CLAIR = {color: new Color('#abcbd0'), name: 'Bleu Clair'};
 
+    useEffect(() => {
+        setTimeout(() => {
+            initDisableMesh.forEach(meshName => {
+                if (primitiveRef.current) {
+                    const mesh = primitiveRef.current.getObjectByName(meshName);
+                    if (mesh) {
+                        mesh.visible = false;
+                    }
+                }
+            })
+        }, 1000)
+    }, [gltf])
+
     const handleMeshClick = (context, position) => {
         if (lastMenuOpen === context) {
             setMenuOpen(!menuOpen);
@@ -43,10 +79,12 @@ function Models() {
         let content;
         switch (context) {
             case 'Front Luggage Rack':
+                const meshFrontLuggage = primitiveRef.current.getObjectByName(model.front_luggage_rack);
                 content =
                     <div>
                         <h3>Porte Baggage avant</h3>
-                        <div className="card-child" onClick={handleChangeProp('ELLIPSE FR1 - phare intégré')}>
+                        <div className={"card-child " + (meshFrontLuggage.visible ? 'select' : '')}
+                             onClick={handleChangeProp('ELLIPSE FR1 - phare intégré', 'switch')}>
                             <h4>ELLIPSE FR1 - phare intégré</h4>
                             <small>
                                 Un porte-bagage avant modernisé, muni d’une plateforme AVS « Quick fix », permettant le
@@ -59,43 +97,47 @@ function Models() {
                         <div>
                             <h4>Pannier</h4>
                             <div className={'flex flex-wrap justify-between'}>
-                                <div className="card-child child" onClick={handleChangeProp('Daily')}>
+                                <div className="card-child child" onClick={handleChangeProp('Daily', 'no-switch')}>
                                     <h4>Daily</h4>
                                     <small>
                                         Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Daily mixte')}>
+                                <div className="card-child child"
+                                     onClick={handleChangeProp('Daily mixte', 'no-switch')}>
                                     <h4>Daily mixte</h4>
                                     <small>
                                         Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Epic standard')}>
+                                <div className="card-child child"
+                                     onClick={handleChangeProp('Epic standard', 'no-switch')}>
                                     <h4>Epic standard</h4>
                                     <small>
                                         Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Epic bois')}>
+                                <div className="card-child child" onClick={handleChangeProp('Epic bois', 'no-switch')}>
                                     <h4>Epic bois</h4>
                                     <small>
                                         Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Woody')}>
+                                <div className="card-child child" onClick={handleChangeProp('Woody', 'no-switch')}>
                                     <h4>Woody</h4>
                                     <small>
                                         Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Bakery standard')}>
+                                <div className="card-child child"
+                                     onClick={handleChangeProp('Bakery standard', 'no-switch')}>
                                     <h4>Bakery standard</h4>
                                     <small>
                                         Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
                                     </small>
                                 </div>
-                                <div className="card-child child" onClick={handleChangeProp('Bakery bois')}>
+                                <div className="card-child child"
+                                     onClick={handleChangeProp('Bakery bois', 'no-switch')}>
                                     <h4>Bakery bois</h4>
                                     <small>
                                         Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
@@ -107,11 +149,14 @@ function Models() {
                     </div>;
                 break;
             case 'Back Luggage Rack':
+                const meshBackLuggage = primitiveRef.current.getObjectByName(model.front_luggage_rack);
+                const meshBackLuggageSimple = primitiveRef.current.getObjectByName(model.simple_back_rack);
                 content = <div>
                     <h3>
                         Porte Bagage arrière
                     </h3>
-                    <div className="card-child" onClick={handleChangeProp('ELLIPSE RR1')}>
+                    <div className={"card-child " + (meshBackLuggage.visible ? 'select' : '')}
+                         onClick={handleChangeProp('ELLIPSE RR1', 'switch')}>
                         <h4>ELLIPSE RR1 - clignotants & feux intégrés</h4>
                         <small>
                             Un porte bagage arrière intégrant feu de position, feu stop et clignotants, garantissant
@@ -172,7 +217,8 @@ function Models() {
                         </div>
                     </div>
 
-                    <div className="card-child" onClick={handleChangeProp('Porte sacoche minimaliste')}>
+                    <div className={"card-child " + (meshBackLuggageSimple.visible ? 'select' : '')}
+                         onClick={handleChangeProp('Porte sacoche minimaliste', 'switch')}>
                         <h4>
                             Porte sacoche minimaliste
                         </h4>
@@ -184,9 +230,12 @@ function Models() {
                 </div>;
                 break;
             case 'Chain / Belt':
+                const meshChain = primitiveRef.current.getObjectByName(model.chain);
+                const meshBelt = primitiveRef.current.getObjectByName(model.belt);
                 content = <div>
                     <h3>Transmission</h3>
-                    <div className="card-child" onClick={handleChangeProp('Courroie')}>
+                    <div className={"card-child " + (meshBelt.visible ? 'select' : '')}
+                         onClick={handleChangeProp('Courroie', 'no-switch')}>
                         <h3>Courroie</h3>
                         <small>
                             Ni graisse, ni entretien, une plus longue durée de vie, la transmission sans prise de tête.
@@ -195,7 +244,8 @@ function Models() {
                             20T – Plateau 52T
                         </small>
                     </div>
-                    <div className="card-child" onClick={handleChangeProp('Chaine')}>
+                    <div className={"card-child " + (meshChain.visible ? 'select' : '')}
+                         onClick={handleChangeProp('Chaine', 'no-switch')}>
                         <h4>Chaine</h4>
                         <small>
                             La transmission la plus polyvalente, pour les trajets du quotidien ou les balades les
@@ -206,12 +256,14 @@ function Models() {
                 </div>;
                 break;
             case 'Fork':
+                const meshFork = primitiveRef.current.getObjectByName(model.normal_fork);
                 content =
                     <div>
                         <h3>
                             Fourche
                         </h3>
-                        <div className="card-child" onClick={handleChangeProp('Fourche suspendue')}>
+                        <div className={"card-child " + (meshFork.visible ? 'select' : '')}
+                             onClick={handleChangeProp('Fourche suspendue', 'switch')}>
                             <h4>Fourche suspendue</h4>
                             <small>
                                 Les pavées et les routes cabossées sont votre quotidien ? Ajoutez du confort à votre
@@ -221,12 +273,14 @@ function Models() {
                     </div>;
                 break;
             case 'Seat':
+                const meshSeat = primitiveRef.current.getObjectByName(model.normal_seat);
                 content =
                     <div>
                         <h3>
                             Selle
                         </h3>
-                        <div className="card-child" onClick={handleChangeProp('Assise suspendue')}>
+                        <div className={"card-child " + (meshSeat.visible ? 'select' : '')}
+                             onClick={handleChangeProp('Assise suspendue', 'switch')}>
                             <h4>Assise suspendue</h4>
                             <small>
                                 Une touche de confort supplémentaire au niveau de l'assise, parfait pour niveler les
@@ -237,14 +291,18 @@ function Models() {
                     </div>;
                 break;
             case 'Stand':
+                const meshRearStand = primitiveRef.current.getObjectByName(model.rear_stand);
+                const meshCentralStand = primitiveRef.current.getObjectByName(model.central_stand);
                 content = <div>
                     <h3>
                         Béquille
                     </h3>
-                    <div className="card-child" onClick={handleChangeProp('Béquille arrière')}>
+                    <div className={"card-child " + (meshRearStand.visible ? 'select' : '')}
+                         onClick={handleChangeProp('Béquille arrière', 'no-switch')}>
                         <h4>Béquille arrière</h4>
                     </div>
-                    <div className="card-child" onClick={handleChangeProp('Béquille centrale')}>
+                    <div className={"card-child " + (meshCentralStand.visible ? 'select' : '')}
+                         onClick={handleChangeProp('Béquille centrale', 'no-switch')}>
                         <h4>Béquille centrale</h4>
                         <small>
                             Cette béquille centrale double apportera davantage de stabilité à votre vélo en le
@@ -261,21 +319,50 @@ function Models() {
         setLastMenuOpen(context);
     }
 
-    const handleChangeProp = (context) => (event) => {
-        if (event.target.classList.contains('card-child')) {
-            event.target.classList.toggle('select');
-        } else {
-            event.target.parentElement.classList.toggle('select');
+    const handleChangeProp = (context, action) => (event) => {
+        if (action === 'no-switch') {
+            if (event.target.classList.contains('select') || event.target.parentElement.classList.contains('select')) {
+                return;
+            }
         }
-        console.log(context);
+
+        if (action === 'switch') {
+            if (event.target.classList.contains('card-child')) {
+                event.target.classList.toggle('select');
+            } else {
+                event.target.parentElement.classList.toggle('select');
+            }
+        } else {
+            const elements = document.querySelectorAll('.select');
+            elements.forEach((element) => {
+                element.classList.remove('select');
+            });
+            if (event.target.classList.contains('card-child')) {
+                event.target.classList.toggle('select');
+            } else {
+                event.target.parentElement.classList.toggle('select');
+            }
+        }
 
         let mesh = null;
 
         switch (context) {
             case 'ELLIPSE FR1 - phare intégré':
+                mesh = primitiveRef.current.getObjectByName(model.front_luggage_rack);
+                mesh.visible = !mesh.visible;
+                break;
+            /*case 'ELLIPSE RR1': TODO : Bug à corriger
+                mesh = primitiveRef.current.getObjectByName(model.back_luggage_rack);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.simple_back_rack).visible = !primitiveRef.current.getObjectByName(model.simple_back_rack).visible;
+                break;
+            case 'Porte sacoche minimaliste':
+                mesh = primitiveRef.current.getObjectByName(model.simple_back_rack);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.back_luggage_rack).visible = !primitiveRef.current.getObjectByName(model.back_luggage_rack).visible;
                 break;
             case 'Daily':
-                break;
+                break;*/
             case 'Chaine':
                 mesh = primitiveRef.current.getObjectByName(model.chain)
                 mesh.visible = !mesh.visible;
@@ -286,6 +373,27 @@ function Models() {
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.chain).visible = !primitiveRef.current.getObjectByName(model.chain).visible;
                 break;
+            case 'Fourche suspendue':
+                mesh = primitiveRef.current.getObjectByName(model.suspension_fork);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.normal_fork).visible = !primitiveRef.current.getObjectByName(model.normal_fork).visible;
+                break;
+            case 'Assise suspendue':
+                mesh = primitiveRef.current.getObjectByName(model.suspension_seat);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.normal_seat).visible = !primitiveRef.current.getObjectByName(model.normal_seat).visible;
+                break;
+            case 'Béquille centrale':
+                mesh = primitiveRef.current.getObjectByName(model.central_stand);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.rear_stand).visible = !primitiveRef.current.getObjectByName(model.rear_stand).visible;
+                break;
+            case 'Béquille arrière':
+                mesh = primitiveRef.current.getObjectByName(model.rear_stand);
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.central_stand).visible = !primitiveRef.current.getObjectByName(model.central_stand).visible;
+                break;
+
         }
     }
 
