@@ -16,6 +16,8 @@ function Models() {
     const primitiveRef = useRef();
     const [cardContent, setCardContent] = useState(null);
     const [lastMenuOpen, setLastMenuOpen] = useState(null);
+    const [isVisibleBackLuggage, setIsVisibleBackLuggage] = useState();
+    const [isVisibleFrontLuggage, setIsVisibleFrontLuggage] = useState();
     const initDisableMesh = [
         model.chain,
         model.suspension_fork,
@@ -69,6 +71,18 @@ function Models() {
         }, 1000)
     }, [gltf])
 
+    useEffect(() => {
+        if (primitiveRef.current) {
+        setCardContent(content('Front Luggage Rack'));
+        }
+    }, [isVisibleFrontLuggage])
+
+    useEffect(() => {
+        if (primitiveRef.current) {
+        setCardContent(content('Back Luggage Rack'));
+        }
+    }, [isVisibleBackLuggage])
+
     const handleMeshClick = (context, position) => {
         if (lastMenuOpen === context) {
             setMenuOpen(!menuOpen);
@@ -76,6 +90,11 @@ function Models() {
             setMenuOpen(true);
         }
 
+        setCardContent(content(context));
+        setLastMenuOpen(context);
+    }
+
+    const content = (context) => {
         let content;
         switch (context) {
             case 'Front Luggage Rack':
@@ -94,57 +113,60 @@ function Models() {
                             </small>
                         </div>
 
-                        <div>
-                            <h4>Pannier</h4>
-                            <div className={'flex flex-wrap justify-between'}>
-                                <div className="card-child child" onClick={handleChangeProp('Daily', 'no-switch')}>
-                                    <h4>Daily</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
-                                    </small>
-                                </div>
-                                <div className="card-child child"
-                                     onClick={handleChangeProp('Daily mixte', 'no-switch')}>
-                                    <h4>Daily mixte</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
-                                    </small>
-                                </div>
-                                <div className="card-child child"
-                                     onClick={handleChangeProp('Epic standard', 'no-switch')}>
-                                    <h4>Epic standard</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
-                                    </small>
-                                </div>
-                                <div className="card-child child" onClick={handleChangeProp('Epic bois', 'no-switch')}>
-                                    <h4>Epic bois</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
-                                    </small>
-                                </div>
-                                <div className="card-child child" onClick={handleChangeProp('Woody', 'no-switch')}>
-                                    <h4>Woody</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
-                                    </small>
-                                </div>
-                                <div className="card-child child"
-                                     onClick={handleChangeProp('Bakery standard', 'no-switch')}>
-                                    <h4>Bakery standard</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
-                                    </small>
-                                </div>
-                                <div className="card-child child"
-                                     onClick={handleChangeProp('Bakery bois', 'no-switch')}>
-                                    <h4>Bakery bois</h4>
-                                    <small>
-                                        Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
-                                    </small>
+                        { isVisibleFrontLuggage === true && (
+                            <div>
+                                <h4>Pannier</h4>
+                                <div className={'flex flex-wrap justify-between'}>
+                                    <div className="card-child child" onClick={handleChangeProp('Daily', 'no-switch')}>
+                                        <h4>Daily</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child"
+                                         onClick={handleChangeProp('Daily mixte', 'no-switch')}>
+                                        <h4>Daily mixte</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child"
+                                         onClick={handleChangeProp('Epic standard', 'no-switch')}>
+                                        <h4>Epic standard</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child"
+                                         onClick={handleChangeProp('Epic bois', 'no-switch')}>
+                                        <h4>Epic bois</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child" onClick={handleChangeProp('Woody', 'no-switch')}>
+                                        <h4>Woody</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child"
+                                         onClick={handleChangeProp('Bakery standard', 'no-switch')}>
+                                        <h4>Bakery standard</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
+                                        </small>
+                                    </div>
+                                    <div className="card-child child"
+                                         onClick={handleChangeProp('Bakery bois', 'no-switch')}>
+                                        <h4>Bakery bois</h4>
+                                        <small>
+                                            Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
 
                     </div>;
                 break;
@@ -169,53 +191,55 @@ function Models() {
                         </small>
                     </div>
 
-                    <div>
-                        <h4>Pannier</h4>
-                        <div className={'flex flex-wrap justify-between'}>
-                            <div className="card-child child" onClick={handleChangeProp('Daily')}>
-                                <h4>Daily</h4>
-                                <small>
-                                    Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Daily mixte')}>
-                                <h4>Daily mixte</h4>
-                                <small>
-                                    Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Epic standard')}>
-                                <h4>Epic standard</h4>
-                                <small>
-                                    Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Epic bois')}>
-                                <h4>Epic bois</h4>
-                                <small>
-                                    Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Woody')}>
-                                <h4>Woody</h4>
-                                <small>
-                                    Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Bakery standard')}>
-                                <h4>Bakery standard</h4>
-                                <small>
-                                    Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
-                                </small>
-                            </div>
-                            <div className="card-child child" onClick={handleChangeProp('Bakery bois')}>
-                                <h4>Bakery bois</h4>
-                                <small>
-                                    Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
-                                </small>
+                    { isVisibleBackLuggage && (
+                        <div>
+                            <h4>Pannier</h4>
+                            <div className={'flex flex-wrap justify-between'}>
+                                <div className="card-child child" onClick={handleChangeProp('Daily')}>
+                                    <h4>Daily</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Daily mixte')}>
+                                    <h4>Daily mixte</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Epic standard')}>
+                                    <h4>Epic standard</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Epic bois')}>
+                                    <h4>Epic bois</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Woody')}>
+                                    <h4>Woody</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Bakery standard')}>
+                                    <h4>Bakery standard</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
+                                    </small>
+                                </div>
+                                <div className="card-child child" onClick={handleChangeProp('Bakery bois')}>
+                                    <h4>Bakery bois</h4>
+                                    <small>
+                                        Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className={"card-child " + (meshBackLuggageSimple.visible ? 'select' : '')}
                          onClick={handleChangeProp('Porte sacoche minimaliste', 'switch')}>
@@ -314,9 +338,7 @@ function Models() {
                 </div>;
                 break;
         }
-
-        setCardContent(content);
-        setLastMenuOpen(context);
+        return content;
     }
 
     const handleChangeProp = (context, action) => (event) => {
@@ -350,11 +372,13 @@ function Models() {
             case 'ELLIPSE FR1 - phare intégré':
                 mesh = primitiveRef.current.getObjectByName(model.front_luggage_rack);
                 mesh.visible = !mesh.visible;
+                setIsVisibleFrontLuggage(mesh.visible);
                 break;
             /*case 'ELLIPSE RR1': TODO : Bug à corriger
                 mesh = primitiveRef.current.getObjectByName(model.back_luggage_rack);
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.simple_back_rack).visible = !primitiveRef.current.getObjectByName(model.simple_back_rack).visible;
+                setIsVisibleBackLuggage(!isVisibleBackLuggage);
                 break;
             case 'Porte sacoche minimaliste':
                 mesh = primitiveRef.current.getObjectByName(model.simple_back_rack);
