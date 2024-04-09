@@ -93,6 +93,14 @@ nav a:hover {
   z-index: 10;
 }
 
+.display-price {
+  position: absolute;
+  top: 10%;
+  right: 20px;
+  z-index: 10;
+  font-size: 2em;
+}
+
 .pastille {
   width: 4vh;
   height: 4vh;

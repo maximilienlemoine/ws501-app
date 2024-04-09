@@ -18,6 +18,7 @@ function Models() {
     const [lastMenuOpen, setLastMenuOpen] = useState(null);
     const [isVisibleBackLuggage, setIsVisibleBackLuggage] = useState();
     const [isVisibleFrontLuggage, setIsVisibleFrontLuggage] = useState();
+    const [price, setPrice] = useState(2090);
     const initDisableMesh = [
         model.chain,
         model.suspension_fork,
@@ -111,6 +112,7 @@ function Models() {
                                 intégré
                                 permet de garder une visibilité totale même chargé.​ Charge max : 10kg | Poids : 0,35kg
                             </small>
+                            <p>+ 49,00€</p>
                         </div>
 
                         { isVisibleFrontLuggage === true && (
@@ -122,6 +124,7 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 20L - 38x26x20 Maillage complet | Poids : 1,37kg
                                         </small>
+                                        <p>+ 45,00€</p>
                                     </div>
                                     <div className="card-child child"
                                          onClick={handleChangeProp('Daily mixte', 'no-switch')}>
@@ -129,6 +132,7 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 20L - 38x26x24 Maillage partiel | Poids : 1,54kg
                                         </small>
+                                        <p>+ 45,00€</p>
                                     </div>
                                     <div className="card-child child"
                                          onClick={handleChangeProp('Epic standard', 'no-switch')}>
@@ -136,6 +140,7 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 24L - 40x30x20 | Poids : 1,34kg
                                         </small>
+                                        <p>+ 55,00€</p>
                                     </div>
                                     <div className="card-child child"
                                          onClick={handleChangeProp('Epic bois', 'no-switch')}>
@@ -143,12 +148,14 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 24L - 30x40x20| Poids : 1,65kg
                                         </small>
+                                        <p>+ 55,00€</p>
                                     </div>
                                     <div className="card-child child" onClick={handleChangeProp('Woody', 'no-switch')}>
                                         <h4>Woody</h4>
                                         <small>
                                             Charge max : 10kg​ - 23L - 40x25x23 | Poids : 2,37kg
                                         </small>
+                                        <p>+ 55,00€</p>
                                     </div>
                                     <div className="card-child child"
                                          onClick={handleChangeProp('Bakery standard', 'no-switch')}>
@@ -156,6 +163,7 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 24L - 45x35x12 | Poids : 2,08kg
                                         </small>
+                                        <p>+ 65,00€</p>
                                     </div>
                                     <div className="card-child child"
                                          onClick={handleChangeProp('Bakery bois', 'no-switch')}>
@@ -163,6 +171,7 @@ function Models() {
                                         <small>
                                             Charge max : 10kg​ - 24L - 45x35x9 | Poids : 2,12kg
                                         </small>
+                                        <p>+ 65,00€</p>
                                     </div>
                                 </div>
                             </div>
@@ -189,9 +198,10 @@ function Models() {
                             rapide de paniers et caisses identiques à l'avant et à l'arrière. Charge max : 27kg​ | Poids
                             : 0,85kg
                         </small>
+                        <p>+ 135,00€</p>
                     </div>
 
-                    { isVisibleBackLuggage && (
+                    {isVisibleBackLuggage && (
                         <div>
                             <h4>Pannier</h4>
                             <div className={'flex flex-wrap justify-between'}>
@@ -250,6 +260,7 @@ function Models() {
                             Un porte sacoche minimaliste pour conserver la ligne du vélo tout en permettant le transport
                             de bagagerie. Charge max : 18kg
                         </small>
+                        <p>+ 79,00€</p>
                     </div>
                 </div>;
                 break;
@@ -280,7 +291,7 @@ function Models() {
                 </div>;
                 break;
             case 'Fork':
-                const meshFork = primitiveRef.current.getObjectByName(model.normal_fork);
+                const meshFork = primitiveRef.current.getObjectByName(model.suspension_fork);
                 content =
                     <div>
                         <h3>
@@ -293,11 +304,12 @@ function Models() {
                                 Les pavées et les routes cabossées sont votre quotidien ? Ajoutez du confort à votre
                                 direction, pour des déplacements sécurisants en ville et sur les chemins. | + 1,85kg
                             </small>
+                            <p>+ 89,00€</p>
                         </div>
                     </div>;
                 break;
             case 'Seat':
-                const meshSeat = primitiveRef.current.getObjectByName(model.normal_seat);
+                const meshSeat = primitiveRef.current.getObjectByName(model.suspension_seat);
                 content =
                     <div>
                         <h3>
@@ -310,8 +322,8 @@ function Models() {
                                 Une touche de confort supplémentaire au niveau de l'assise, parfait pour niveler les
                                 défauts de la route et éviter les plus gros chocs.​ | +0,2kg
                             </small>
+                            <p>+ 35,00€</p>
                         </div>
-
                     </div>;
                 break;
             case 'Stand':
@@ -334,11 +346,20 @@ function Models() {
                             chargement de votre vélo ou lors de l’installation d’un enfant dans le siège arrière.​
                             Charge max : 40kg​ | Poids : 0,7kg
                         </small>
+                        <p>+ 39,00€</p>
                     </div>
                 </div>;
                 break;
         }
         return content;
+    }
+
+    const addPrice = (change) => {
+        setPrice(prevPrice => prevPrice + change);
+    }
+
+    const removePrice = (change) => {
+        setPrice(prevPrice => prevPrice - change);
     }
 
     const handleChangeProp = (context, action) => (event) => {
@@ -373,6 +394,11 @@ function Models() {
                 mesh = primitiveRef.current.getObjectByName(model.front_luggage_rack);
                 mesh.visible = !mesh.visible;
                 setIsVisibleFrontLuggage(mesh.visible);
+                if (mesh.visible) {
+                    addPrice(49);
+                } else {
+                    removePrice(49);
+                }
                 break;
             /*case 'ELLIPSE RR1': TODO : Bug à corriger
                 mesh = primitiveRef.current.getObjectByName(model.back_luggage_rack);
@@ -401,21 +427,38 @@ function Models() {
                 mesh = primitiveRef.current.getObjectByName(model.suspension_fork);
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.normal_fork).visible = !primitiveRef.current.getObjectByName(model.normal_fork).visible;
+
+                if (mesh.visible) {
+                    addPrice(89)
+                } else {
+                    removePrice(89)
+                }
                 break;
             case 'Assise suspendue':
                 mesh = primitiveRef.current.getObjectByName(model.suspension_seat);
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.normal_seat).visible = !primitiveRef.current.getObjectByName(model.normal_seat).visible;
+                if (mesh.visible) {
+                    addPrice(35)
+                } else {
+                    removePrice(35)
+                }
                 break;
             case 'Béquille centrale':
                 mesh = primitiveRef.current.getObjectByName(model.central_stand);
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.rear_stand).visible = !primitiveRef.current.getObjectByName(model.rear_stand).visible;
+                if (mesh.visible) {
+                    addPrice(39)
+                }
                 break;
             case 'Béquille arrière':
                 mesh = primitiveRef.current.getObjectByName(model.rear_stand);
                 mesh.visible = !mesh.visible;
                 primitiveRef.current.getObjectByName(model.central_stand).visible = !primitiveRef.current.getObjectByName(model.central_stand).visible;
+                if (mesh.visible) {
+                    removePrice(39)
+                }
                 break;
 
         }
@@ -458,6 +501,9 @@ function Models() {
                         {cardContent}
                     </div>
                 )}
+            </div>
+            <div className={'display-price'}>
+                {price}€
             </div>
             <Canvas>
                 <ambientLight intensity={1}/>
