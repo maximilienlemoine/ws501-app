@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {OrbitControls, useGLTF} from '@react-three/drei';
 import {useLocation} from "react-router-dom";
 import {Canvas} from "@react-three/fiber";
@@ -268,6 +268,25 @@ function Models() {
             event.target.parentElement.classList.toggle('select');
         }
         console.log(context);
+
+        let mesh = null;
+
+        switch (context) {
+            case 'ELLIPSE FR1 - phare intégré':
+                break;
+            case 'Daily':
+                break;
+            case 'Chaine':
+                mesh = primitiveRef.current.getObjectByName(model.chain)
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.belt).visible = !primitiveRef.current.getObjectByName(model.belt).visible;
+                break;
+            case 'Courroie':
+                mesh = primitiveRef.current.getObjectByName(model.belt)
+                mesh.visible = !mesh.visible;
+                primitiveRef.current.getObjectByName(model.chain).visible = !primitiveRef.current.getObjectByName(model.chain).visible;
+                break;
+        }
     }
 
     const handleColorChange = (color) => () => {
