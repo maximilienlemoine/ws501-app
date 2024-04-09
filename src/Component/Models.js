@@ -46,14 +46,14 @@ function Models() {
             case 'Front Luggage Rack':
                 content =
                     <div>
-                        <h2>Porte Baggage avant</h2>
-                        <h3>
+                        <h3>Porte Baggage avant</h3>
+                        <h4>
                             <FormControlLabel
                                 control={<Switch/>}
                                 label={'ELLIPSE FR1 - phare intégré'}
                                 onChange={handleSwitchProp(context)}
                             />
-                        </h3>
+                        </h4>
                         <small>
                             Un porte-bagage avant modernisé, muni d’une plateforme AVS « Quick fix », permettant le
                             montage rapide de paniers et caisses identiques à l'avant et à l'arrière. Le phare intégré
@@ -63,11 +63,11 @@ function Models() {
                 break;
             case 'Back Luggage Rack':
                 content = <div>
-                    <h2>
+                    <h3>
                         Porte Bagage arrière
-                    </h2>
+                    </h3>
                     <div className="card-child" onClick={handleChangeProp('ELLIPSE RR1')}>
-                        <h3>ELLIPSE RR1 - clignotants & feux intégrés</h3>
+                        <h4>ELLIPSE RR1 - clignotants & feux intégrés</h4>
                         <small>
                             Un porte bagage arrière intégrant feu de position, feu stop et clignotants, garantissant
                             ainsi une parfaite visibilité même lorsque le vélo est chargé. Supportant jusqu’à 27kg,
@@ -81,9 +81,9 @@ function Models() {
 
                     {/* Si select activer la div des accessoires sinon hide */}
                     <div className="card-child select" onClick={handleChangeProp('Porte sacoche minimaliste')}>
-                        <h3>
+                        <h4>
                             Porte sacoche minimaliste
-                        </h3>
+                        </h4>
                         <small>
                             Un porte sacoche minimaliste pour conserver la ligne du vélo tout en permettant le transport
                             de bagagerie. Charge max : 18kg
@@ -93,7 +93,7 @@ function Models() {
                 break;
             case 'Chain / Belt':
                 content = <div>
-                    <h2>Transmission</h2>
+                    <h3>Transmission</h3>
                     <div className="card-child" onClick={handleChangeProp('Courroie')}>
                         <h3>Courroie</h3>
                         <small>
@@ -104,7 +104,7 @@ function Models() {
                         </small>
                     </div>
                     <div className="card-child" onClick={handleChangeProp('Chaine')}>
-                        <h3>Chaine</h3>
+                        <h4>Chaine</h4>
                         <small>
                             La transmission la plus polyvalente, pour les trajets du quotidien ou les balades les
                             weekends. Sentez vous à l’aise même dans les pentes les plus raides grâce à 9 vitesses. La
@@ -116,16 +116,16 @@ function Models() {
             case 'Fork':
                 content =
                     <div>
-                        <h2>
-                            Fourche
-                        </h2>
                         <h3>
+                            Fourche
+                        </h3>
+                        <h4>
                             <FormControlLabel
                                 control={<Switch/>}
                                 label={'Fourche suspendue'}
                                 onChange={handleSwitchProp(context)}
                             />
-                        </h3>
+                        </h4>
                         <small>
                             Les pavées et les routes cabossées sont votre quotidien ? Ajoutez du confort à votre
                             direction, pour des déplacements sécurisants en ville et sur les chemins. | + 1,85kg
@@ -135,16 +135,16 @@ function Models() {
             case 'Seat':
                 content =
                     <div>
-                        <h2>
-                            Selle
-                        </h2>
                         <h3>
+                            Selle
+                        </h3>
+                        <h4>
                             <FormControlLabel
                                 control={<Switch/>}
                                 label={'Assise suspendue'}
                                 onChange={handleSwitchProp(context)}
                             />
-                        </h3>
+                        </h4>
                         <small>
                             Une touche de confort supplémentaire au niveau de l'assise, parfait pour niveler les défauts
                             de la route et éviter les plus gros chocs.​ | +0,2kg
@@ -153,14 +153,14 @@ function Models() {
                 break;
             case 'Stand':
                 content = <div>
-                    <h2>
+                    <h3>
                         Béquille
-                    </h2>
+                    </h3>
                     <div className="card-child" onClick={handleChangeProp('Béquille arrière')}>
-                        <h3>Béquille arrière</h3>
+                        <h4>Béquille arrière</h4>
                     </div>
                     <div className="card-child" onClick={handleChangeProp('Béquille centrale')}>
-                        <h3>Béquille centrale</h3>
+                        <h4>Béquille centrale</h4>
                         <small>
                             Cette béquille centrale double apportera davantage de stabilité à votre vélo en le
                             maintenant parfaitement droit. Ce qui peut s’avérer particulièrement pratique lors du
@@ -199,7 +199,7 @@ function Models() {
     return (
         <div style={{width: "100%", height: "90vh"}}>
             <div className={'display-color'}>
-                <div className="flex column gap-5">
+                <div className="flex column gap-10">
                     {[BLEU_PETROLE, NOIR_MINUIT, GRIS_LUNE, SABLE, JAUNE, ORANGE, ROUGE, BORDEAUX, ROSE, VIOLET, BLEU_VIOLET, VERT_ANGLAIS, KAKI_CLAIR, VERT_EAU, BLEU_CLAIR].map((color, index) => (
                         <div key={index}
                              className="pastille"

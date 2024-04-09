@@ -146,15 +146,15 @@ function Import() {
     }
 
     if (!isAuthenticated) {
-        return <h1>Accès refusé. Vous devez être connecté pour accéder à cette page.</h1>
+        return <h2>Accès refusé. Vous devez être connecté pour accéder à cette page.</h2>
     }
 
     return (
         <div>
-            <h1>Import</h1>
+            <h2>Import</h2>
             {!gltf && (
                 <section>
-                    <h2>Charger un modèle 3D</h2>
+                    <h3>Charger un modèle 3D</h3>
                     <input type="file" onChange={handleChangeFile}/>
                     {file && (
                         <section>
@@ -171,7 +171,7 @@ function Import() {
 
             {gltf && (
                 <section>
-                    <h2>Modèle 3D chargé</h2>
+                    <h3>Modèle 3D chargé</h3>
                     <li>Nom: <input type={"text"} onChange={handleChangeModelName} value={modelName}/></li>
 
                     Selectionnez les meshs correspondant aux éléments suivants:

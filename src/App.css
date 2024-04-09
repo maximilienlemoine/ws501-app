@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .flex {
   display: flex;
 }
@@ -14,8 +10,25 @@
   flex-direction: column;
 }
 
-.gap-5 {
+.gap-10 {
   gap: 10px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+  font-family: 'OpenSans', sans-serif;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #0071E3;
 }
 
 .card {

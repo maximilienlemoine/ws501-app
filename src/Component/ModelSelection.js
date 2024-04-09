@@ -24,7 +24,7 @@ function ModelSelection() {
 
     return (
         <div>
-            <h1>Selectionnez un modèle</h1>
+            <h2>Selectionnez un modèle</h2>
             {models.map((model, index) => (
                 <button key={index} onClick={() => handleModelClick(model)}>
                     {model.name}

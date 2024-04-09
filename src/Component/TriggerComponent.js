@@ -22,7 +22,6 @@ function TriggerComponent({handleMeshClick, position, context}) {
   return (
       <mesh scale={[0.1, 0.1, 0.1]} position={position} onClick={openMenu} ref={mesh}>
           <circleGeometry/>
-
       </mesh>
   );
 }
