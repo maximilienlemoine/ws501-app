@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {startTransition, useState} from 'react';
 import {GLTFLoader} from "three/addons";
+import {useNavigate} from "react-router-dom";
 
 function Import() {
     const isAuthenticated = true;
@@ -18,6 +19,7 @@ function Import() {
     const central_stand = React.createRef();
     const front_luggage_rack = React.createRef();
     const back_luggage_rack = React.createRef();
+    const simple_back_rack = React.createRef();
     const front_daily = React.createRef();
     const back_daily = React.createRef();
     const front_daily_mixte = React.createRef();
@@ -34,6 +36,8 @@ function Import() {
     const back_backery_bois = React.createRef();
     const back_thule_bag = React.createRef();
 
+    const navigate = useNavigate();
+
     const refs = [
         { name: 'Cadre', ref: frame },
         { name: 'Courroie', ref: belt },
@@ -46,6 +50,7 @@ function Import() {
         { name: 'Béquille centrale', ref: central_stand },
         { name: 'Porte baggage avant', ref: front_luggage_rack },
         { name: 'Porte baggage arrière', ref: back_luggage_rack },
+        { name: 'Porte sacoche minimaliste', ref: simple_back_rack },
         { name: 'Daily avant', ref: front_daily },
         { name: 'Daily arrière', ref: back_daily },
         { name: 'Daily Mixte avant', ref: front_daily_mixte },
@@ -81,6 +86,7 @@ function Import() {
             central_stand: `${central_stand.current.value}`,
             front_luggage_rack: `${front_luggage_rack.current.value}`,
             back_luggage_rack: `${back_luggage_rack.current.value}`,
+            simple_back_rack: `${simple_back_rack.current.value}`,
             front_daily: `${front_daily.current.value}`,
             back_daily: `${back_daily.current.value}`,
             front_daily_mixte: `${front_daily_mixte.current.value}`,
@@ -108,8 +114,13 @@ function Import() {
 
         try {
             const response = await fetch('http://localhost:8000/model', options)
-            const data = await response.json()
-            console.log(data)
+
+            if (response.status === 200) {
+                startTransition(() => {
+                    navigate(`/select-model`);
+                    }
+                )
+            }
         } catch (e) {
             console.error('Error:', e);
         }
