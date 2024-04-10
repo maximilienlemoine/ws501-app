@@ -103,7 +103,7 @@ function Models() {
                 content =
                     <div>
                         <h3>Porte Baggage avant</h3>
-                        <div className={"card-child " + (meshFrontLuggage.visible ? 'select' : '')}
+                        <div className={"card-child " + (meshFrontLuggage?.visible ? 'select' : '')}
                              onClick={handleChangeProp('ELLIPSE FR1 - phare intégré', 'switch')}>
                             <h4>ELLIPSE FR1 - phare intégré</h4>
                             <small>
@@ -186,7 +186,7 @@ function Models() {
                     <h3>
                         Porte Bagage arrière
                     </h3>
-                    <div className={"card-child " + (meshBackLuggage.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshBackLuggage?.visible ? 'select' : '')}
                          onClick={handleChangeProp('ELLIPSE RR1', 'switch')}>
                         <h4>ELLIPSE RR1 - clignotants & feux intégrés</h4>
                         <small>
@@ -251,7 +251,7 @@ function Models() {
                         </div>
                     )}
 
-                    <div className={"card-child " + (meshBackLuggageSimple.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshBackLuggageSimple?.visible ? 'select' : '')}
                          onClick={handleChangeProp('Porte sacoche minimaliste', 'switch')}>
                         <h4>
                             Porte sacoche minimaliste
@@ -269,7 +269,7 @@ function Models() {
                 const meshBelt = primitiveRef.current.getObjectByName(model.belt);
                 content = <div>
                     <h3>Transmission</h3>
-                    <div className={"card-child " + (meshBelt.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshBelt?.visible ? 'select' : '')}
                          onClick={handleChangeProp('Courroie', 'no-switch')}>
                         <h3>Courroie</h3>
                         <small>
@@ -279,7 +279,7 @@ function Models() {
                             20T – Plateau 52T
                         </small>
                     </div>
-                    <div className={"card-child " + (meshChain.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshChain?.visible ? 'select' : '')}
                          onClick={handleChangeProp('Chaine', 'no-switch')}>
                         <h4>Chaine</h4>
                         <small>
@@ -297,7 +297,7 @@ function Models() {
                         <h3>
                             Fourche
                         </h3>
-                        <div className={"card-child " + (meshFork.visible ? 'select' : '')}
+                        <div className={"card-child " + (meshFork?.visible ? 'select' : '')}
                              onClick={handleChangeProp('Fourche suspendue', 'switch')}>
                             <h4>Fourche suspendue</h4>
                             <small>
@@ -315,7 +315,7 @@ function Models() {
                         <h3>
                             Selle
                         </h3>
-                        <div className={"card-child " + (meshSeat.visible ? 'select' : '')}
+                        <div className={"card-child " + (meshSeat?.visible ? 'select' : '')}
                              onClick={handleChangeProp('Assise suspendue', 'switch')}>
                             <h4>Assise suspendue</h4>
                             <small>
@@ -333,11 +333,11 @@ function Models() {
                     <h3>
                         Béquille
                     </h3>
-                    <div className={"card-child " + (meshRearStand.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshRearStand?.visible ? 'select' : '')}
                          onClick={handleChangeProp('Béquille arrière', 'no-switch')}>
                         <h4>Béquille arrière</h4>
                     </div>
-                    <div className={"card-child " + (meshCentralStand.visible ? 'select' : '')}
+                    <div className={"card-child " + (meshCentralStand?.visible ? 'select' : '')}
                          onClick={handleChangeProp('Béquille centrale', 'no-switch')}>
                         <h4>Béquille centrale</h4>
                         <small>
