@@ -466,12 +466,29 @@ function Models() {
 
     const handleColorChange = (color) => () => {
         if (primitiveRef.current) {
-            const mesh = primitiveRef.current.getObjectByName(model.frame);
+            let mesh = primitiveRef.current.getObjectByName(model.frame);
+            console.log(mesh)
             if (mesh) {
                 mesh.material.color.set(color);
                 mesh.material.needsUpdate = true;
             } else {
                 console.log(`No mesh found with name ${model.frame}`);
+            }
+            mesh = primitiveRef.current.getObjectByName(model.normal_fork)
+            console.log(mesh)
+            if (mesh) {
+                mesh.material.color.set(color);
+                mesh.material.needsUpdate = true;
+            } else {
+                console.log(`No mesh found with name ${model.normal_fork}`);
+            }
+            mesh = primitiveRef.current.getObjectByName(model.suspension_fork)
+            console.log(mesh)
+            if (mesh) {
+                mesh.material.color.set(color);
+                mesh.material.needsUpdate = true;
+            } else {
+                console.log(`No mesh found with name ${model.suspension_fork}`);
             }
         }
     }
@@ -509,49 +526,52 @@ function Models() {
                 <ambientLight intensity={1}/>
                 <directionalLight position={[-1, 1, 0]} intensity={0.8}/>
                 <directionalLight position={[1, 1, 0]} intensity={0.8}/>
+                <directionalLight position={[1, 0, 0]} intensity={0.8}/>
+                <directionalLight position={[-1, 0, 0]} intensity={0.8}/>
                 <pointLight position={[0, 3, 0]}/>
                 <OrbitControls
                     autoRotate
                     autoRotateSpeed={1}
-                    minDistance={1.5}
-                    maxDistance={3}
+                    minDistance={1}
+                    maxDistance={2}
                     enablePan={false}
+                    position={[0, 2, 0]}
                 />
                 {model && (
                     <group>
                         <TriggerComponent
-                            position={[0, 0.4, -1]}
+                            position={[0.55, 0.3, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Front Luggage Rack'}
                         />
                         <TriggerComponent
-                            position={[0, 0.4, 0.9]}
+                            position={[-0.55, 0.3, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Back Luggage Rack'}
                         />
                         <TriggerComponent
-                            position={[0, -0.3, 0.7]}
+                            position={[-0.35, -0.1, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Chain / Belt'}
                         />
                         <TriggerComponent
-                            position={[0, -0.2, -0.7]}
+                            position={[0.55, 0.05, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Fork'}
                         />
                         <TriggerComponent
-                            position={[0, 0.8, 0.38]}
+                            position={[-0.3, 0.5, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Seat'}
                         />
                         <TriggerComponent
-                            position={[0, -0.6, -0.1]}
+                            position={[0.1, -0.25, 0]}
                             handleMeshClick={handleMeshClick}
                             context={'Stand'}
                         />
                     </group>
                 )}
-                <primitive ref={primitiveRef} object={gltf.scene} dispose={null}/>
+                <primitive position={[0, -0.5, 0]} ref={primitiveRef} object={gltf.scene} dispose={null}/>
             </Canvas>
         </div>
     );

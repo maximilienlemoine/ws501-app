@@ -20,7 +20,7 @@ function TriggerComponent({handleMeshClick, position, context}) {
         mesh.current.lookAt(camera.position);
     });
   return (
-      <mesh scale={[0.1, 0.1, 0.1]} position={position} onClick={openMenu} ref={mesh}>
+      <mesh scale={[0.06, 0.06, 0.06]} position={position} onClick={openMenu} ref={mesh}>
           <circleGeometry/>
       </mesh>
   );
